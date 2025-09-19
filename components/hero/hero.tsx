@@ -1,9 +1,11 @@
 import * as React from "react";
 import {Coffee} from "lucide-react";
+import SearchBar from "../search-bar/search-bar";
+import Pill from "../pill/pill";
 
-const Hero = () => {
+const Hero = ({...props}) => {
   return (
-    <section className="relative overflow-hidden">
+    <section {...props}>
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent to-muted"></div>
       <div className="mx-auto max-w-6xl px-4 py-10 md:py-16">
         <div className="grid gap-2 text-sm text-muted-foreground">
@@ -20,6 +22,9 @@ const Hero = () => {
             baristas, coffee enthusiasts, and anyone passionate about the world
             of coffee.
           </p>
+
+          <SearchBar className="flex flex-col gap-3 sm:flex-row mt-6" />
+          <Pill className="mt-5 flex flex-wrap gap-2" />
         </div>
       </div>
     </section>
