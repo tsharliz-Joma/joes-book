@@ -1,20 +1,13 @@
+
 import * as React from "React";
 import {Button} from "../ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Bookmark, Flame, PlayCircle} from "lucide-react";
+import {allGuides, Guide} from "contentlayer/generated";
 
-const featuredGuides = [
-  {title: "Dial in Espresso at Home", minutes: 6, difficulty: "Intermediate"},
-  {title: "V60: 4:6 Method Walkthrough", minutes: 8, difficulty: "Beginner"},
-  {
-    title: "AeroPress Inverted – Competition Recipe",
-    minutes: 5,
-    difficulty: "Pro",
-  },
-  {title: "French Press – Clean Cup Hack", minutes: 4, difficulty: "Beginner"},
-];
 
 const Featured = ({...props}) => {
+  const featuredGuides: Guide[] = allGuides;
   return (
     <section {...props}>
       <div className="flex items-center justify-between">
@@ -26,8 +19,8 @@ const Featured = ({...props}) => {
         </Button>
       </div>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredGuides.map((guide) => (
-          <Card key={guide.title} className="group">
+        {featuredGuides.map((guide, idx) => (
+          <Card key={idx} className="group">
             <CardContent className="p-0">
               <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-accent/50" />
             </CardContent>
