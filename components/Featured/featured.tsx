@@ -1,13 +1,13 @@
-
-import * as React from "React";
+import * as React from "react";
+import Link from "next/link";
 import {Button} from "../ui/button";
 import {Card, CardContent, CardHeader, CardTitle} from "../ui/card";
 import {Bookmark, Flame, PlayCircle} from "lucide-react";
 import {allGuides, Guide} from "contentlayer/generated";
 
-
 const Featured = ({...props}) => {
   const featuredGuides: Guide[] = allGuides;
+
   return (
     <section {...props}>
       <div className="flex items-center justify-between">
@@ -26,7 +26,7 @@ const Featured = ({...props}) => {
             </CardContent>
             <CardHeader className="space-y-2">
               <CardTitle className="line-clamp-2 text-base font-medium">
-                {guide.title}
+                <Link href={`guides/${guide.slug}`}>{guide.title}</Link>
               </CardTitle>
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-1">

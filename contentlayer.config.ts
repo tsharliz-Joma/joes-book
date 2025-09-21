@@ -3,6 +3,7 @@ import {defineDocumentType, makeSource} from "contentlayer/source-files";
 export const Guide = defineDocumentType(() => ({
   name: "Guide",
   filePathPattern: `*.md`,
+  contentType: "markdown",
   fields: {
     title: {type: "string", required: true},
     difficulty: {type: "string", required: true},
@@ -11,14 +12,16 @@ export const Guide = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: "string",
-      resolve: (guide) => `guides/${guide._raw.flattenedPath}`,
+      resolve: (guide) => `mdx/guides/${guide._raw.flattenedPath}`,
+    },
+    slug: {
+      type: "string",
+      resolve: (guide) => guide._raw.flattenedPath,
     },
   },
 }));
 
-
-
 export default makeSource({
-  contentDirPath: "guides/",
+  contentDirPath: "mdx/guides",
   documentTypes: [Guide],
 });
