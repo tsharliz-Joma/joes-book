@@ -1,21 +1,17 @@
 import * as React from "react";
+import Link from "next/link";
+import { allGuides, Guide } from "@/.contentlayer/generated";
 import {Badge} from "../ui/badge";
 
-const brewMethods = [
-  {name: "Espresso", slug: "espresso"},
-  {name: "V60 / Pour-over", slug: "v60"},
-  {name: "AeroPress", slug: "aeropress"},
-  {name: "French Press", slug: "french-press"},
-  {name: "Moka Pot", slug: "moka-pot"},
-  {name: "Cold Brew", slug: "cold-brew"},
-];
+
 
 const Pill = ({...props}) => {
+  const guides: Guide[] = allGuides;
   return (
     <div {...props}>
-      {brewMethods.map((method) => (
+      {guides.map((method) => (
         <Badge key={method.slug} variant="secondary" className="cursor-pointer">
-          {method.name}
+          <Link href={`${method.slug}`}>{method.title}</Link>
         </Badge>
       ))}
     </div>

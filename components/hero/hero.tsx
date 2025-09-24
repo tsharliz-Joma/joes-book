@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import {Coffee} from "lucide-react";
 import SearchBar from "../search-bar/search-bar";
@@ -22,7 +23,6 @@ const Hero = ({...props}) => {
             baristas, coffee enthusiasts, and anyone passionate about the world
             of coffee.
           </p>
-
           <SearchBar className="flex flex-col gap-3 sm:flex-row mt-6" />
           <Pill className="mt-5 flex flex-wrap gap-2" />
         </div>

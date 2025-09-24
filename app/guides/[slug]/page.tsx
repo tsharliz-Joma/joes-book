@@ -2,22 +2,16 @@ import * as React from "react";
 import {allGuides} from "contentlayer/generated";
 
 export const generateStaticParams = async () =>
-  allGuides.map((guide) => ({slug: guide._raw.flattenedPath}));
+  allGuides.map((guide) => ({slug: guide.slugAsParams}));
 
-export const generateMetadata = ({
-  params,
-}: {
-  params: Promise<{slug: string}>;
-}) => {
-  return params.then(({slug}) => {
-    const guide = allGuides.find((guide) => guide._raw.flattenedPath === slug);
-    if (!guide) throw new Error("Guide not found");
-    return {title: guide.title};
-  });
+export const generateMetadata = ({params}: {params: {slug: string}}) => {
+  const guide = allGuides.find((guide) => guide.slugAsParams === params.slug);
+  if (!guide) return {title: "Guide not found"}; // don’t throw here
+  return {title: guide.title};
 };
 
-const FeaturedGuideLayout = ({params}: {params: {slug: string}}) => {
-  return <div>Featured Guide Layout</div>;
+const GuidePage = ({params}: {params: {slug: string}}) => {
+  return <div>How to brew: {params.slug}</div>;
 };
 
-export default FeaturedGuideLayout;
+export default GuidePage;

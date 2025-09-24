@@ -15,18 +15,18 @@ const Featured = ({...props}) => {
           Featured brew guides
         </h2>
         <Button variant="ghost" className="text-sm">
-          View all
+          <Link href="/guides">View all</Link>
         </Button>
       </div>
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {featuredGuides.map((guide, idx) => (
+        {featuredGuides.slice(0, 4).map((guide, idx) => (
           <Card key={idx} className="group">
             <CardContent className="p-0">
               <div className="aspect-video w-full overflow-hidden rounded-t-2xl bg-accent/50" />
             </CardContent>
             <CardHeader className="space-y-2">
               <CardTitle className="line-clamp-2 text-base font-medium">
-                <Link href={`guides/${guide.slug}`}>{guide.title}</Link>
+                <Link href={`${guide.slug}`}>{guide.title}</Link>
               </CardTitle>
               <div className="flex items-center gap-3 text-xs text-muted-foreground">
                 <span className="inline-flex items-center gap-1">
