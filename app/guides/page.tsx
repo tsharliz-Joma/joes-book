@@ -1,9 +1,8 @@
 import * as React from "react";
 import {allGuides} from "contentlayer/generated";
 
-
 const GuidePage = ({...props}) => {
-    return <div {...props}>All Guides Page</div>;
-}
+  return <main {...props}>All Guides Page</main>;
+};
 
 export default GuidePage;

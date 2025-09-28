@@ -47,14 +47,14 @@ export const BrewGuide = defineDocumentType(() => ({
     notes: {type: "list", of: {type: "string"}},
     troubleshooting: {
       type: "list",
-      of: TROUBLESHOOTING,
+      of: _TROUBLESHOOTING,
     },
     variations: {type: "list", of: {type: "string"}},
 
     // STRUCTURED STEPS (for your checklist UI)
     steps: {
       type: "list",
-      of: STEPS,
+      of: _STEPS,
     },
 
     // META
@@ -109,7 +109,7 @@ const _VIDEO = defineNestedType(() => ({
   },
 }));
 
-const TROUBLESHOOTING = defineNestedType(() => ({
+const _TROUBLESHOOTING = defineNestedType(() => ({
   name: "Troubleshooting",
   fields: {
     problem: {type: "string", required: true},
@@ -118,12 +118,34 @@ const TROUBLESHOOTING = defineNestedType(() => ({
   },
 }));
 
-const STEPS = defineNestedType(() => ({
+const _STEPS = defineNestedType(() => ({
   name: "Steps",
   fields: {
     title: {type: "string", required: true},
     details: {type: "string", required: true},
     timer_sec: {type: "number"},
+  },
+}));
+
+export const VideoGuide = defineDocumentType(() => ({
+  name: "Video",
+  filePathPattern: "videos/*.md",
+  contentType: "markdown",
+  fields: {
+    title: {type: "string", required: true},
+    description: {type: "string", required: true},
+    video_id: {type: "string", required: true}, // Mux playback ID
+    minutes: {type: "number", required: true},
+  },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) => `/videos/${doc._raw.flattenedPath.split("/").pop()}`,
+    },
+    slugAsParams: {
+      type: "string",
+      resolve: (doc) => doc._raw.flattenedPath.split("/").pop()!,
+    },
   },
 }));
 

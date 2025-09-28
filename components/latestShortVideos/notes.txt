@@ -1,0 +1,12 @@
+// What i need in order to load videos
+
+
+- PlaybackId
+- Metadata Object = video_id && video_title && viewer_user_id
+
+On the short videos section, I will have make an api to fetch all my videos
+and loop through , displaying an MuxPlayer component for all of them
+
+ { The api to fetch all videos may have to be a util function ? }
+
+ I am going to have to make an api call within the server component

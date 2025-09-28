@@ -10,8 +10,8 @@ export const generateMetadata = ({params}: {params: {slug: string}}) => {
   return {title: guide.title};
 };
 
-const GuidePage = ({params}: {params: {slug: string}}) => {
+const IndividualGuidePage = ({params}: {params: {slug: string}}) => {
   return <div>How to brew: {params.slug}</div>;
 };
 
-export default GuidePage;
+export default IndividualGuidePage;
