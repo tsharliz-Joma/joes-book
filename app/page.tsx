@@ -4,23 +4,10 @@ import Featured from "@/components/featured/featured";
 import Footer from "@/components/footer/footer";
 import Equipment from "@/components/equipment/equipment";
 import LatestShortVideos from "@/components/latestShortVideos/latestShortVideos";
-import {MuxAssetResponseType} from "@/types/mux";
+import {getMuxAssets} from "@/lib/mux";
 
 export default async function Home() {
-  const basic = Buffer.from(
-    `${process.env.MUX_TOKEN_ID}:${process.env.MUX_SECRET}`,
-  ).toString("base64");
-  const res = await fetch(`${process.env.MUX_ENDPOINT}`, {
-    next: {revalidate: 120},
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Basic ${basic}`,
-    },
-  });
-  if (!res.ok) throw new Error(`Failed to fetch Mux assets`);
-  const Mux: MuxAssetResponseType = await res.json();
-
+  const Mux = await getMuxAssets();
   return (
     <div className="">
       {/* Navbar here */}

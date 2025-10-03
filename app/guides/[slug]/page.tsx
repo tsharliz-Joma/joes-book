@@ -4,8 +4,13 @@ import {allGuides} from "contentlayer/generated";
 export const generateStaticParams = async () =>
   allGuides.map((guide) => ({slug: guide.slugAsParams}));
 
-export const generateMetadata = ({params}: {params: {slug: string}}) => {
-  const guide = allGuides.find((guide) => guide.slugAsParams === params.slug);
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{slug: string}>;
+}) => {
+  const {slug} = await params;
+  const guide = allGuides.find((guide) => guide.slugAsParams === slug);
   if (!guide) return {title: "Guide not found"}; // don’t throw here
   return {title: guide.title};
 };

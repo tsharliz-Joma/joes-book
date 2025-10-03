@@ -2,17 +2,12 @@ import * as React from "react";
 import {Button} from "../ui/button";
 import Link from "next/link";
 import MuxPlayer from "@mux/mux-player-react";
-import {LatestShortVideosProps, PublicPlaybackIdType} from "@/types/mux";
+import {LatestShortVideosProps} from "@/types/mux";
+import {getPublicPlaybackId} from "@/lib/mux";
 
 const LatestShortVideos = async ({mux, ...props}: LatestShortVideosProps) => {
   const assets = mux.data;
-  console.log(assets);
-  const getPublicPlaybackId = (asset: PublicPlaybackIdType) => {
-    return (
-      asset.playback_ids?.find((p: any) => p.policy !== "signed")?.id ??
-      asset.playback_ids?.[0]?.id
-    );
-  };
+
   return (
     <section {...props}>
       <div className="flex items-center justify-between">
@@ -27,9 +22,7 @@ const LatestShortVideos = async ({mux, ...props}: LatestShortVideosProps) => {
         {assets.map((video, i) => {
           const playbackId = getPublicPlaybackId(video);
           return (
-            <div
-              key={`${video.video_title}-${i++}`}
-              className="">
+            <div key={`${video.video_title}-${i++}`} className="">
               <MuxPlayer
                 key={i}
                 playbackId={playbackId}
